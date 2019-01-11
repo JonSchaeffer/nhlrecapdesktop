@@ -1,4 +1,4 @@
-#NHLRecaps
+# NHLRecaps
 
 This desktop application was built using electron and is very much a work in progress.
 Desktop releases will be made availiable once I feel the application has reached
@@ -9,7 +9,7 @@ and in the future, nhl standings, team/player stats, etc. Furthermore,
 I wanted a way to showcase (and gain) experience with Javascript, HTML,
 and CSS. 
 
-#Installing the dependencies
+# Installing the dependencies
 
 To be able to run this experemental application, you will need Electron, which is installed
 with npm. Most systems should have npm installed, but if not please refer to google. With
