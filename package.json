@@ -9,7 +9,7 @@
   "author": "Jonathan Schaeffer",
   "license": "MIT",
   "devDependencies": {
-    "electron": "^4.0.0"
+    "electron": "^4.0.1"
   },
   "dependencies": {
     "jquery": "^3.3.1"
