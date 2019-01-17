@@ -3,7 +3,7 @@ const path = require('path');
 const url = require('url');
 
 //SET Environment
-process.env.NODE_ENV = 'development';
+process.env.NODE_ENV = 'production';
 
 const {app, BrowserWindow, Menu, ipcMain} = electron;
 
@@ -55,12 +55,6 @@ const mainMenuTemplate = [
     {
         label: 'File',
         submenu:[
-            {
-                label: 'Select Favorite Team(s)',
-                click(){
-                    createFavoriteWindow();
-                }
-            },
             {
                 label: 'Quit',
                 accelerator:process.platform == 'darwin' ? 'Command+q' : 'Ctrl+q',
