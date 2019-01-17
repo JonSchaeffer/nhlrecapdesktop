@@ -1,15 +1,19 @@
 {
   "name": "nhlgamerecaps",
-  "version": "0.1.0",
-  "description": "An application which grabs all the recent game recaps and places them in one convient place!",
+  "version": "0.0.1",
+  "description": "An application which displays recent game recaps and places them in one convient place!",
   "main": "main.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "package-mac": "electron-packager . --overwrite --platform=darwin --arch=x64 --icon=assets/icons/mac/icon.icns --prune=true --out=release-builds",
+    "package-win": "electron-packager . electron-tutorial-app --overwrite --asar=true --platform=win32 --arch=ia32 --icon=assets/icons/win/icon.ico --prune=true --out=release-builds --version-string.CompanyName=CE --version-string.FileDescription=CE --version-string.ProductName=\"Electron Tutorial App\"",    
+    "package-linux": "electron-packager . electron-tutorial-app --overwrite --asar=true --platform=linux --arch=x64 --icon=assets/icons/png/1024x1024.png --prune=true --out=release-builds"
   },
   "author": "Jonathan Schaeffer",
   "license": "MIT",
   "devDependencies": {
-    "electron": "^4.0.1"
+    "electron": "^4.0.1",
+    "electron-packager": "^13.0.1"
   },
   "dependencies": {
     "jquery": "^3.3.1"
