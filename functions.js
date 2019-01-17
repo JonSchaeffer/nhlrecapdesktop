@@ -1,10 +1,11 @@
-
 function getGameContent(gameID, callback) {   
 
     console.log(gameID);
     $.getJSON('https://statsapi.web.nhl.com/api/v1/game/' + gameID + '/content').then(function(data){
+        var videoURL = data.media.epg[3].items[0].playbacks[9].url;
+        var pictureURL = data.media.epg[3].items[0].image.cuts['960x540'].src;
 
-        callback(data.media.epg[3].items[0].playbacks[9].url, data.media.epg[3].items[0].image.cuts['960x540'].src);
+        callback(videoURL, pictureURL);
     });
 }
 
@@ -12,11 +13,14 @@ function getGameContent(gameID, callback) {
 function getGamesAccordingToDate(date, callback){
     $.getJSON('https://statsapi.web.nhl.com/api/v1/schedule?date=' + date).then(function(data){
         var gameIds = [];
+        var matchups = [];
 
         data.dates[0].games.forEach(function(e){
             gameIds.push(e.gamePk);
+            matchups.push(e.teams.away.team.name + " vs " + e.teams.home.team.name);
+            // console.log(data.dates[0].games);
         });
-        callback(gameIds);
+        callback(gameIds, matchups);
 
     });
 }
@@ -37,3 +41,4 @@ function getOlderDate(numOfDays){
 Element.prototype.appendAfter = function (element) {
     element.parentNode.insertBefore(this, element.nextSibling);
 }, false;
+
