@@ -1,4 +1,5 @@
 const electron = require('electron');
+const ipcMain = require('electron').ipcMain;
 const path = require('path');
 const url = require('url');
 
@@ -31,6 +32,11 @@ app.on('ready', function(){
     const mainMenu = Menu.buildFromTemplate(mainMenuTemplate);
     //Insert a menu
     Menu.setApplicationMenu(mainMenu);
+});
+
+//Handle page navigation
+ipc.on('load-page', (event, arg) => {
+    mainWindow.loadURL(arg);
 });
 
 //Handle the favorite window
