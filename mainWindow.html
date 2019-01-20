@@ -10,8 +10,8 @@
 </head>
 <body>
     <div class="sidenav">
-        <a href="#index.html">Game Recaps</a>
-        <a href="#condensedGames.html">Condensed Games</a>
+        <a id = "index" href="#index.html">Game Recaps</a>
+        <a id = "condensedGames" href="#condensedGames.html">Condensed Games</a>
         <a href="#clients">Favorites</a>
         <a href="#contact">Standings</a>
     </div>
@@ -24,6 +24,7 @@
     <script src="functions.js"></script>
     <script>
         const electron = require('electron');
+        const ipc = require('electron').ipcRenderer;
         window.jQuery = window.$ = require('jquery'); //This takes the place of require for js. Electron handles importing differently.
 
         getGamesAccordingToDate(getOlderDate(1), function(gamesForTheDay, matchups){
@@ -89,18 +90,16 @@
             });
         });
 
+        
+        var condensedGame = document.getElementById('condensedGames');
+        condensedGame.onclick = changeToCondensedGames;
 
+        function changeToCondensedGames(){
+            ipc.send('load-page', 'file://' + __dirname + '/condensedGames.html');
+            console.log("TEST");
+        }
 
-
-
-        function test(){
-            var newVideo = document.createElement("video");
-            newVideo.width = "300";
-            newVideo.height = "200";
-            newVideo.src = videoURL;
-            newVideo.poster = pictureURL;
-            document.body.appendChild(newVideo);
-        };
+        
 
 
 
