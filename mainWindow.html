@@ -1,107 +1,97 @@
 <!DOCTYPE html>
-<html lang="en">
+<html ng-app="NHLRecaps">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.7/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.7/angular-route.min.js"></script>
     <title>NHL Game Recaps</title>
     <link rel="stylesheet" href="css/main.css">
 
 </head>
 <body>
     <div class="sidenav">
-        <a href="#index.html">Game Recaps</a>
-        <a href="#condensedGames.html">Condensed Games</a>
-        <a href="#clients">Favorites</a>
-        <a href="#contact">Standings</a>
+        <a href="#/">Game Recaps</a>
+        <a href="#/condensedGames">Condensed Games</a>
+        <!-- <a href="#">Favorites</a>
+        <a href="#">Standings</a> -->
     </div>
+
     <div class="main">
-        <h1>NHL Game Recaps</h1>
-        <div id="videos"></div>
+            <div ng-view></div>
     </div>
+
     <!-- <button onclick="test()">Test</button> -->
 
-    <script src="functions.js"></script>
+    <script src="app.js"></script>
+    <!-- <script src="functions.js"></script> -->
     <script>
-        const electron = require('electron');
-        window.jQuery = window.$ = require('jquery'); //This takes the place of require for js. Electron handles importing differently.
+        // const electron = require('electron');
+        // window.jQuery = window.$ = require('jquery'); //This takes the place of require for js. Electron handles importing differently.
 
-        getGamesAccordingToDate(getOlderDate(1), function(gamesForTheDay, matchups){
-            var i = 0;
-            var header = document.createElement("h1");
-            header.textContent = getOlderDate(1);
-            var videoWrapper = document.createElement("div");
-            videoWrapper.className = "wrapper";
-            videoWrapper.id = "videoWrapper1";
-            document.getElementById("videos").appendChild(header);
-            document.getElementById("videos").appendChild(videoWrapper);
-            gamesForTheDay.forEach(function(e){
-                getGameContent(e, function(videoURL, pictureURL){
-                    var newDiv = document.createElement("div");
-                    newDiv.className = "box " + e;
-                    newDiv.id = "video" + e;
-                    document.getElementById('videoWrapper1').appendChild(newDiv);
-                    var newVideo = document.createElement("video");
-                    newVideo.width = "300";
-                    newVideo.height = "200";
-                    newVideo.src = videoURL;
-                    newVideo.poster = pictureURL;
-                    newVideo.controls = true;
-                    document.getElementById('video' + e).appendChild(newVideo);
-                    var gameMatchup = document.createElement("p");
-                    gameMatchup.textContent = matchups[i];
-                    gameMatchup.id = "gameMatchup";
-                    document.getElementById('video' + e).insertAdjacentElement("afterbegin", gameMatchup);
-                    i++;
-                });
-            });
-        });
+        // getGamesAccordingToDate(getOlderDate(1), function(gamesForTheDay, matchups){
+        //     var i = 0;
+        //     var header = document.createElement("h1");
+        //     header.textContent = getOlderDate(1);
+        //     var videoWrapper = document.createElement("div");
+        //     videoWrapper.className = "wrapper";
+        //     videoWrapper.id = "videoWrapper1";
+        //     document.getElementById("videos").appendChild(header);
+        //     document.getElementById("videos").appendChild(videoWrapper);
+        //     gamesForTheDay.forEach(function(e){
+        //         getGameContent(e, function(videoURL, pictureURL){
+        //             var newDiv = document.createElement("div");
+        //             newDiv.className = "box " + e;
+        //             newDiv.id = "video" + e;
+        //             document.getElementById('videoWrapper1').appendChild(newDiv);
+        //             var newVideo = document.createElement("video");
+        //             newVideo.width = "300";
+        //             newVideo.height = "200";
+        //             newVideo.src = videoURL;
+        //             newVideo.poster = pictureURL;
+        //             newVideo.controls = true;
+        //             document.getElementById('video' + e).appendChild(newVideo);
+        //             var gameMatchup = document.createElement("p");
+        //             gameMatchup.textContent = matchups[i];
+        //             gameMatchup.id = "gameMatchup";
+        //             document.getElementById('video' + e).insertAdjacentElement("afterbegin", gameMatchup);
+        //             i++;
+        //         });
+        //     });
+        // });
 
-        getGamesAccordingToDate(getOlderDate(2), function(gamesForTheDay, matchups){
-            var i = 0;
-            var header = document.createElement("h1");
-            header.textContent = getOlderDate(2);
-            header.id = "videoHeader2";
-            var videoWrapper = document.createElement("div");
-            videoWrapper.className = "wrapper";
-            videoWrapper.id = "videoWrapper2";
-            header.appendAfter(document.getElementById("videoWrapper1"));
-            videoWrapper.appendAfter(document.getElementById("videoHeader2"));
-            gamesForTheDay.forEach(function(e){
-                getGameContent(e, function(videoURL, pictureURL){
-                    var newDiv = document.createElement("div");
-                    newDiv.className = "box " + e;
-                    newDiv.id = "video" + e;
-                    document.getElementById('videoWrapper2').appendChild(newDiv);
-                    var newVideo = document.createElement("video");
-                    newVideo.width = "300";
-                    newVideo.height = "200";
-                    newVideo.src = videoURL;
-                    newVideo.poster = pictureURL;
-                    newVideo.controls = true;
-                    document.getElementById('video' + e).appendChild(newVideo);
-                    var gameMatchup = document.createElement("p");
-                    gameMatchup.textContent = matchups[i];
-                    gameMatchup.id = "gameMatchup";
-                    document.getElementById('video' + e).insertAdjacentElement("afterbegin", gameMatchup);
-                    i++;
-                });
-            });
-        });
-
-
-
-
-
-        function test(){
-            var newVideo = document.createElement("video");
-            newVideo.width = "300";
-            newVideo.height = "200";
-            newVideo.src = videoURL;
-            newVideo.poster = pictureURL;
-            document.body.appendChild(newVideo);
-        };
-
+        // getGamesAccordingToDate(getOlderDate(2), function(gamesForTheDay, matchups){
+        //     var i = 0;
+        //     var header = document.createElement("h1");
+        //     header.textContent = getOlderDate(2);
+        //     header.id = "videoHeader2";
+        //     var videoWrapper = document.createElement("div");
+        //     videoWrapper.className = "wrapper";
+        //     videoWrapper.id = "videoWrapper2";
+        //     header.appendAfter(document.getElementById("videoWrapper1"));
+        //     videoWrapper.appendAfter(document.getElementById("videoHeader2"));
+        //     gamesForTheDay.forEach(function(e){
+        //         getGameContent(e, function(videoURL, pictureURL){
+        //             var newDiv = document.createElement("div");
+        //             newDiv.className = "box " + e;
+        //             newDiv.id = "video" + e;
+        //             document.getElementById('videoWrapper2').appendChild(newDiv);
+        //             var newVideo = document.createElement("video");
+        //             newVideo.width = "300";
+        //             newVideo.height = "200";
+        //             newVideo.src = videoURL;
+        //             newVideo.poster = pictureURL;
+        //             newVideo.controls = true;
+        //             document.getElementById('video' + e).appendChild(newVideo);
+        //             var gameMatchup = document.createElement("p");
+        //             gameMatchup.textContent = matchups[i];
+        //             gameMatchup.id = "gameMatchup";
+        //             document.getElementById('video' + e).insertAdjacentElement("afterbegin", gameMatchup);
+        //             i++;
+        //         });
+        //     });
+        // });
 
 
     </script>
