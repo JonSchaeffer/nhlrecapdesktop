@@ -23,7 +23,7 @@ app.config(function($routeProvider){
 
 
 app.controller('RecapController', function($scope){
-    $scope.message = "Hello from RecapController";
+    $scope.init = getYesterdayGames();
 });
 
 app.controller('CondensedController', function($scope){
