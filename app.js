@@ -16,9 +16,9 @@ app.config(function($routeProvider){
         controller : 'CondensedController'
     })
 
-    .when('/favorites',{
-        templateUrl : 'favorites.html',
-        controller : 'FavoritesController'
+    .when('/standings',{
+        templateUrl : 'standings.html',
+        controller : 'StandingsController'
     })
 
     .otherwise({redirectTo: 'gameRecaps.html'});
@@ -31,14 +31,14 @@ app.controller('RecapController', function(){
     });
 });
 
-app.controller('CondensedController', function($scope){
+app.controller('CondensedController', function(){
     angular.element(document).ready(function(){
         getGames("condensed");
     });
 });
 
-app.controller('FavoritesController', function($scope){
-    $scope.message = "Hello from FavoritesController";
+app.controller('StandingsController', function(){
+    console.log(getStandings());
 });
 
 ////////////////////
@@ -155,6 +155,11 @@ function getGames(typeOfGame){
             });
         });
     });
+}
 
-
+function getStandings(){
+    $.getJSON('https://statsapi.web.nhl.com/api/v1/standings').then(function(data){
+        console.log(data.records);
+        return data.records;
+    });
 }
