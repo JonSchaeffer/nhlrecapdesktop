@@ -38,7 +38,7 @@ app.controller('CondensedController', function(){
 });
 
 app.controller('StandingsController', function(){
-    console.log(getStandings());
+    getStandings();
 });
 
 ////////////////////
@@ -107,9 +107,11 @@ function getGames(typeOfGame){
         getGameContent(e, typeOfGame, function(videoURL, pictureURL){
             var newDiv = document.createElement("div");
             newDiv.className = "box " + e;
+            newDiv.className = "card";
             newDiv.id = "video" + e;
             document.getElementById('videoWrapper1').appendChild(newDiv);
             var newVideo = document.createElement("video");
+            newVideo.className = "card-image";
             newVideo.width = "300";
             newVideo.height = "200";
             newVideo.src = videoURL;
@@ -157,9 +159,46 @@ function getGames(typeOfGame){
     });
 }
 
-function getStandings(){
+function getStandings(callback){
+
     $.getJSON('https://statsapi.web.nhl.com/api/v1/standings').then(function(data){
-        console.log(data.records);
-        return data.records;
+        // var metro = data.records[0];
+        // var atlantic = data.records[1];
+        // var central = data.records[2];
+        // var pacific = data.records[3];
+
+        console.log(data.records[1].teamRecords[0]);
+
+
+
+        data.records.forEach(function(e){
+            e.teamRecords.forEach(function(t){
+                // var newDiv = document.createElement("div");
+                // newDiv.id = t.team.name;
+                // document.getElementById(e.division.name).appendChild(newDiv);
+                var tableID = e.division.name;
+                console.log(e.division.name);
+                var table = document.getElementById(tableID);
+                var row = table.insertRow();
+                var cell1 = row.insertCell();
+                cell1.innerHTML = t.team.name;
+                var cell2 = row.insertCell();
+                cell2.innerHTML = t.points;
+                var cell3 = row.insertCell();
+                cell3.innerHTML = t.leagueRecord.wins;
+                var cell4 = row.insertCell();
+                cell4.innerHTML = t.leagueRecord.losses;
+                var cell5 = row.insertCell();
+                cell5.innerHTML = t.leagueRecord.ot;
+                var cell6 = row.insertCell();
+                cell6.innerHTML = t.gamesPlayed
+                var cell7 = row.insertCell();
+                cell7.innerHTML = t.streak.streakCode;
+
+
+
+            });
+        });
+        
     });
 }
